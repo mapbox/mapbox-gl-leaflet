@@ -29,8 +29,13 @@
 
 var map = L.map('map', {maxZoom: 17}).setView([-37.821, 175.219], 16);
 
+var token = location.hash.replace('#', '');
+if (!token) {
+    token = prompt('Mapbox Access Token');
+}
+
 var gl = L.mapboxGL({
-    token: 'pk.eyJ1IjoibW91cm5lciIsImEiOiJWWnRiWG1VIn0.j6eccFHpE3Q04XPLI7JxbA',
+    token: token,
     style: 'https://www.mapbox.com/mapbox-gl-styles/styles/bright-v4.json'
 }).addTo(map);
 

@@ -19,6 +19,11 @@
 <script src="../leaflet-mapbox-gl.js"></script>
 <script>
 
+var token = location.hash.replace('#', '');
+if (!token) {
+    token = prompt('Mapbox Access Token');
+}
+
 var map = L.map('map').setView([38.912753, -77.032194], 15);
 
 L.marker([38.912753, -77.032194])
@@ -27,7 +32,7 @@ L.marker([38.912753, -77.032194])
     .openPopup();
 
 var gl = L.mapboxGL({
-    token: 'pk.eyJ1IjoibW91cm5lciIsImEiOiJWWnRiWG1VIn0.j6eccFHpE3Q04XPLI7JxbA',
+    token: token,
     style: 'https://www.mapbox.com/mapbox-gl-styles/styles/bright-v4.json'
 }).addTo(map);
 
