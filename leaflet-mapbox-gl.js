@@ -50,7 +50,8 @@ L.MapboxGL = L.Class.extend({
             container: this._glContainer,
             interactive: false,
             center: [center.lat, center.lng],
-            zoom: this._map.getZoom() - 1
+            zoom: this._map.getZoom() - 1,
+            attributionControl: false
         });
 
         this._glMap = new mapboxgl.Map(options);
@@ -72,7 +73,13 @@ L.MapboxGL = L.Class.extend({
 
         var center = this._map.getCenter();
 
-        gl.setView([center.lat, center.lng], this._map.getZoom() - 1, 0);
+        // gl.setView([center.lat, center.lng], this._map.getZoom() - 1, 0);
+        // calling setView directly causes sync issues because it uses requestAnimFrame
+
+        var tr = gl.transform;
+        tr.center = mapboxgl.LatLng.convert([center.lat, center.lng]);
+        tr.zoom = this._map.getZoom() - 1;
+        gl.render();
     },
 
     _animateZoom: function (e) {
