@@ -1,12 +1,13 @@
-L.GLLayer = L.Class.extend({
-
-    options: {
-        maxZoom: 20,
-        minZoom: 0,
-    },
+L.MapboxGL = L.Class.extend({
 
     initialize: function (options) {
         L.setOptions(this, options);
+
+        if (options.token) {
+            mapboxgl.accessToken = options.token;
+        } else {
+            throw new Error('You should provide a Mapbox GL access token as a token option.')
+        }
     },
 
     onAdd: function (map) {
@@ -45,22 +46,14 @@ L.GLLayer = L.Class.extend({
     _initGL: function () {
         var center = this._map.getCenter();
 
-        this._glMap = new llmr.Map({
+        var options = L.extend({}, this.options, {
             container: this._glContainer,
             interactive: false,
-            sources: {
-                "mapbox streets": {
-                    type: 'vector',
-                    urls: ['http://a.gl-api-us-east-1.tilestream.net/v3/mapbox.mapbox-streets-v4/{z}/{x}/{y}.vector.pbf'],
-                    tileSize: 512,
-                    zooms: [0, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14],
-                }
-            },
             center: [center.lat, center.lng],
-            zoom: this._map.getZoom(),
-            maxZoom: 20,
-            style: style_json
+            zoom: this._map.getZoom() - 1
         });
+
+        this._glMap = new mapboxgl.Map(options);
     },
 
     _update: function () {
@@ -79,15 +72,19 @@ L.GLLayer = L.Class.extend({
 
         var center = this._map.getCenter();
 
-        gl.setPosition([center.lat, center.lng], this._map.getZoom());
+        gl.setView([center.lat, center.lng], this._map.getZoom() - 1, 0);
     },
 
     _animateZoom: function (e) {
-        var origin = e.origin.add(this._map._getMapPanePos());
-        this._glMap.zoomTo(e.zoom, 250, [origin.x, origin.y], [0, 0, 0.25, 1]);
+        var origin = e.origin.add(this._map._getMapPanePos()).subtract(map.getSize().divideBy(2));
+        this._glMap.zoomTo(e.zoom - 1, {
+            duration: 250,
+            offset: [origin.x, origin.y],
+            easing: [0, 0, 0.25, 1]
+        });
     }
 });
 
-L.glLayer = function (options) {
-    return new L.GLLayer(options);
+L.mapboxGL = function (options) {
+    return new L.MapboxGL(options);
 };
