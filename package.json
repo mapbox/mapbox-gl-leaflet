@@ -1,0 +1,32 @@
+{
+  "name": "mapbox-gl-leaflet",
+  "version": "0.0.0",
+  "description": "binding from mapbox gl to the leaflet api",
+  "main": "leaflet-mapbox-gl.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "jshint leaflet-mapbox-gl.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mapbox/mapbox-gl-leaflet.git"
+  },
+  "keywords": [
+    "mapbox",
+    "gl",
+    "leaflet",
+    "leafletjs",
+    "maps"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mapbox/mapbox-gl-leaflet/issues"
+  },
+  "homepage": "https://github.com/mapbox/mapbox-gl-leaflet",
+  "devDependencies": {
+    "jshint": "~2.5.5"
+  }
+}
