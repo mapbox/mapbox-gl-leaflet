@@ -83,7 +83,7 @@ L.MapboxGL = L.Class.extend({
     },
 
     _animateZoom: function (e) {
-        var origin = e.origin.add(this._map._getMapPanePos()).subtract(map.getSize().divideBy(2));
+        var origin = e.origin.add(this._map._getMapPanePos()).subtract(this._map.getSize().divideBy(2));
         this._glMap.zoomTo(e.zoom - 1, {
             duration: 250,
             offset: [origin.x, origin.y],
