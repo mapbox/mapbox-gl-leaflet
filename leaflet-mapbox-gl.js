@@ -3,8 +3,8 @@ L.MapboxGL = L.Class.extend({
     initialize: function (options) {
         L.setOptions(this, options);
 
-        if (options.token) {
-            mapboxgl.accessToken = options.token;
+        if (options.accessToken) {
+            mapboxgl.accessToken = options.accessToken;
         } else {
             throw new Error('You should provide a Mapbox GL access token as a token option.');
         }
