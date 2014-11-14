@@ -1,4 +1,4 @@
-## `L.mapboxGl(options)`
+## `L.mapboxGL(options)`
 
 Create a new Mapbox GL layer in a Leaflet-compatible wrapper.
 
