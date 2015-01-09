@@ -17,7 +17,7 @@ L.MapboxGL = L.Class.extend({
             this._initContainer();
         }
 
-        map._panes.overlayPane.appendChild(this._glContainer);
+        map._panes.tilePane.appendChild(this._glContainer);
         map.on('zoomanim', this._animateZoom, this);
         map.on('move', this._update, this);
 
@@ -25,7 +25,7 @@ L.MapboxGL = L.Class.extend({
     },
 
     onRemove: function (map) {
-        map.getPanes().overlayPane.removeChild(this._glContainer);
+        map.getPanes().tilePane.removeChild(this._glContainer);
         map.off('zoomanim', this._animateZoom, this);
         map.off('move', this._update, this);
     },
