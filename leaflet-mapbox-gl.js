@@ -79,7 +79,7 @@ L.MapboxGL = L.Class.extend({
         var tr = gl.transform;
         tr.center = mapboxgl.LatLng.convert([center.lat, center.lng]);
         tr.zoom = this._map.getZoom() - 1;
-        gl.render();
+        gl.update();
     },
 
     _animateZoom: function (e) {
