@@ -65,7 +65,7 @@ L.MapboxGL = L.Class.extend({
 
         L.DomUtil.setPosition(container, topLeft);
 
-        if (gl.transform.width !== size.x || gl.transform.width !== size.y) {
+        if (gl.transform.width !== size.x || gl.transform.height !== size.y) {
             container.style.width  = size.x + 'px';
             container.style.height = size.y + 'px';
             gl.resize();
