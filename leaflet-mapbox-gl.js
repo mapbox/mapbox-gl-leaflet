@@ -49,7 +49,7 @@ L.MapboxGL = L.Class.extend({
         var options = L.extend({}, this.options, {
             container: this._glContainer,
             interactive: false,
-            center: [center.lat, center.lng],
+            center: [center.lng, center.lat],
             zoom: this._map.getZoom() - 1,
             attributionControl: false
         });
@@ -71,7 +71,7 @@ L.MapboxGL = L.Class.extend({
         // calling setView directly causes sync issues because it uses requestAnimFrame
 
         var tr = gl.transform;
-        tr.center = mapboxgl.LatLng.convert([center.lat, center.lng]);
+        tr.center = mapboxgl.LngLat.convert([center.lng, center.lat]);
         tr.zoom = this._map.getZoom() - 1;
 
         if (gl.transform.width !== size.x || gl.transform.height !== size.y) {
