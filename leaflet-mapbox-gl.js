@@ -57,6 +57,8 @@ L.MapboxGL = L.Class.extend({
         });
 
         this._glMap = new mapboxgl.Map(options);
+        // allow GL base map to pan beyond min/max latitudes
+        this._glMap.transform.latRange = null;
     },
 
     _update: function () {
