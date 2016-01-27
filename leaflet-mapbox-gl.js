@@ -49,7 +49,6 @@ L.MapboxGL = L.Layer.extend({
 
     getEvents: function () {
         return {
-            moveend: this._update, // ensure the map always updates at the end of a move
             move: this._throttledUpdate, // sensibly throttle updating while panning
             zoomanim: this._animateZoom, // ensure animation at the end of a zoom
             zoom: this._animateZoom // animate on the zoom event for smooth pinch-zooming
