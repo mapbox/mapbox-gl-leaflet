@@ -1,4 +1,20 @@
+function debounce (func, wait, immediate) {
+    var timeout;
+    return function () {
+        var context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        }, wait);
+        if (immediate && !timeout) func.apply(context, args);
+    };
+};
+
 L.MapboxGL = L.Layer.extend({
+    options: {
+      updateInterval: 50
+    },
 
     initialize: function (options) {
         L.setOptions(this, options);
@@ -8,6 +24,9 @@ L.MapboxGL = L.Layer.extend({
         } else {
             throw new Error('You should provide a Mapbox GL access token as a token option.');
         }
+
+        // setup throttling the update event when panning
+        this._throttledUpdate = debounce.call(this, this._update, this.options.updateInterval);
     },
 
     onAdd: function (map) {
@@ -30,8 +49,10 @@ L.MapboxGL = L.Layer.extend({
 
     getEvents: function () {
         return {
-            move: this._update,
-            zoomanim: this._animateZoom
+            moveend: this._update, // ensure the map always updates at the end of a move
+            move: this._throttledUpdate, // sensibly throttle updating while panning
+            zoomanim: this._animateZoom, // ensure animation at the end of a zoom
+            zoom: this._animateZoom // animate on the zoom event for smooth pinch-zooming
         }
     },
 
