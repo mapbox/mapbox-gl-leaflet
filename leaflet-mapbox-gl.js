@@ -1,19 +1,6 @@
-function debounce (func, wait, immediate) {
-    var timeout;
-    return function () {
-        var context = this, args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(function () {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        }, wait);
-        if (immediate && !timeout) func.apply(context, args);
-    };
-};
-
 L.MapboxGL = L.Layer.extend({
     options: {
-      updateInterval: 50
+      updateInterval: 32
     },
 
     initialize: function (options) {
@@ -26,7 +13,7 @@ L.MapboxGL = L.Layer.extend({
         }
 
         // setup throttling the update event when panning
-        this._throttledUpdate = debounce.call(this, this._update, this.options.updateInterval);
+        this._throttledUpdate = mapboxgl.util.throttle(L.Util.bind(this._update, this), this.options.updateInterval);
     },
 
     onAdd: function (map) {
@@ -92,6 +79,9 @@ L.MapboxGL = L.Layer.extend({
     },
 
     _update: function (e) {
+        // update the offset so we can correct for it later when we zoom
+        this._offset = this._map.containerPointToLayerPoint([0, 0]);
+
         if (this._zooming) {
           return;
         }
@@ -134,7 +124,7 @@ L.MapboxGL = L.Layer.extend({
       var scale = this._map.getZoomScale(e.zoom),
           offset = this._map._latLngToNewLayerPoint(this._map.getBounds().getNorthWest(), e.zoom, e.center);
 
-      L.DomUtil.setTransform(this._glMap._canvas.canvas, offset, scale);
+      L.DomUtil.setTransform(this._glMap._canvas.canvas, offset.subtract(this._offset), scale);
     },
 
     _zoomStart: function () {
@@ -143,12 +133,18 @@ L.MapboxGL = L.Layer.extend({
 
     _zoomEnd: function () {
       var zoom = this._map.getZoom(),
-          center = this._map.getCenter();
+          center = this._map.getCenter(),
+          offset = this._map.latLngToContainerPoint(this._map.getBounds().getNorthWest());
 
-      // update the map on teh next available frame to avoid stuttering
+      // update the map on the next available frame to avoid stuttering
       L.Util.requestAnimFrame(function () {
-        // reset the scale
-        L.DomUtil.setTransform(this._glMap._canvas.canvas, L.point(0,0), 1);
+        // reset the scale and offset
+        L.DomUtil.setTransform(this._glMap._canvas.canvas, offset, 1);
+
+        // enable panning once the gl map is ready again
+        this._glMap.once('moveend', L.Util.bind(function () {
+          this._zooming = false;
+        }, this));
 
         // update the map position
         this._glMap.jumpTo({
@@ -156,9 +152,6 @@ L.MapboxGL = L.Layer.extend({
           zoom: zoom - 1
         });
       }, this);
-
-      // allow panning to work again
-      this._zooming = false;
     }
 });
 
