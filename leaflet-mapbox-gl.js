@@ -50,10 +50,10 @@ L.MapboxGL = L.Layer.extend({
     getEvents: function () {
         return {
             move: this._throttledUpdate, // sensibly throttle updating while panning
-            zoomanim: this._animateZoom, // ensure animation at the end of a zoom
-            zoom: this._pinchZoom, // animate on the zoom event for smoother pinch-zooming
-            zoomstart: this._zoomStart,
-            zoomend: this._zoomEnd
+            zoomanim: this._animateZoom, // applys the zoom animation to the <canvas>
+            zoom: this._pinchZoom, // animate every zoom event for smoother pinch-zooming
+            zoomstart: this._zoomStart, // flag starting a zoom to disable panning
+            zoomend: this._zoomEnd // reset the gl map view at the end of a zoom
         }
     },
 
