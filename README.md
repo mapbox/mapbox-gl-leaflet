@@ -32,9 +32,13 @@ Code for these examples is hosted in the [examples folder](https://github.com/ma
 ## Installation
 Add a script tag referencing mapbox-gl-leaflet after adding leaflet in your website:
 ```html
-	<link rel="stylesheet" href="leaflet.css" />
-	<script src="leaflet.js"></script>
-	<script src="leaflet-mapbox-gl.js"></script>
+<link rel="stylesheet" href="leaflet.css" />
+<script src="leaflet.js"></script>
+<script src="leaflet-mapbox-gl.js"></script>
+	
+<!-- Mapbox GL -->
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.14.3/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.14.3/mapbox-gl.js'></script>
 ```
 You can also use Rawgit as a CDN using:
 ```html
