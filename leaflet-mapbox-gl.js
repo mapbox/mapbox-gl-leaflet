@@ -51,7 +51,7 @@ L.MapboxGL = L.Layer.extend({
         return {
             move: this._throttledUpdate, // sensibly throttle updating while panning
             zoomanim: this._animateZoom, // ensure animation at the end of a zoom
-            zoom: this._animateZoom // animate on the zoom event for smooth pinch-zooming
+            zoom: this._pinch // animate on the zoom event for smooth pinch-zooming
         }
     },
 
@@ -84,7 +84,14 @@ L.MapboxGL = L.Layer.extend({
         this._glMap.transform.latRange = null;
     },
 
-    _update: function () {
+    _pinch: function (e) {
+      this._glMap.jumpTo({
+        zoom: this._map.getZoom() - 1,
+        center: this._map.getCenter()
+      });
+    },
+
+    _update: function (e) {
         var size = this._map.getSize(),
             container = this._glContainer,
             gl = this._glMap,
@@ -109,7 +116,6 @@ L.MapboxGL = L.Layer.extend({
             gl.update();
         }
     },
-
     _animateZoom: function (e) {
         // borrowed from the Leaflet 0.7.7 origin calcuation
         // https://github.com/Leaflet/Leaflet/blob/v0.7.7/src/map/anim/Map.ZoomAnimation.js#L47-L50
