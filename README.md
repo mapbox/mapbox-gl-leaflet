@@ -61,6 +61,7 @@ If you only need the mapbox-gl-js features ([adding a map with a mapbox-style, a
 
 ## Bug Reports & Feature Requests
 Please use the [issue tracker](https://github.com/mapbox/mapbox-gl-leaflet/issues) to report any bugs or file feature requests.
+You can fork this [jsfiddle template](https://jsfiddle.net/fnicollet/9w9er53v/) to reproduce a bug, then share the URL of your fork in the GitHub issue.
 
 ## Licence
 The MIT License (MIT)
