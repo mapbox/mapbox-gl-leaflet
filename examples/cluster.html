@@ -1,8 +1,14 @@
 <html>
+
 <head>
     <title>WebGL</title>
     <meta charset="utf-8">
-    <style>#map { width: 800px; height: 600px; }</style>
+    <style>
+        #map {
+            width: 800px;
+            height: 600px;
+        }
+    </style>
 
     <!-- Leaflet -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
@@ -22,35 +28,42 @@
 </head>
 
 <body>
-<div id="map"></div>
+    <div id="map"></div>
 
-<script src="../leaflet-mapbox-gl.js"></script>
-<script>
+    <script src="../leaflet-mapbox-gl.js"></script>
+    <script>
+        var map = L.map('map', {
+            maxZoom: 17
+        }).setView([-37.821, 175.219], 16);
 
-var map = L.map('map', {maxZoom: 17}).setView([-37.821, 175.219], 16);
+        // var token = location.hash.replace('#', '');
+        // if (!token) {
+        //     token = prompt('Mapbox Access Token');
+        // }
 
-var token = location.hash.replace('#', '');
-if (!token) {
-    token = prompt('Mapbox Access Token');
-}
+        //OSM2VectorTiles does not need a token, only L.mapboxGL does but I'd set it optional givent the fact that
+        //it is possible to have free vector tiles (also on a GeoServer)
+        var gl = L.mapboxGL({
+            style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
+            accessToken: 'this_layer_does_not_need_a_token_only_the_lib_does',
+            // bearing: 27,
+            // pitch: 45,
+            // zoom: 11 // starting zoom
+        }).addTo(map);
+        var markers = L.markerClusterGroup();
 
-var gl = L.mapboxGL({
-    accessToken: token,
-    style: 'mapbox://styles/mapbox/streets-v8'
-}).addTo(map);
+        for (var i = 0; i < addressPoints.length; i++) {
+            var a = addressPoints[i];
+            var title = a[2];
+            var marker = L.marker(new L.LatLng(a[0], a[1]), {
+                title: title
+            });
+            marker.bindPopup(title);
+            markers.addLayer(marker);
+        }
 
-var markers = L.markerClusterGroup();
-
-for (var i = 0; i < addressPoints.length; i++) {
-    var a = addressPoints[i];
-    var title = a[2];
-    var marker = L.marker(new L.LatLng(a[0], a[1]), { title: title });
-    marker.bindPopup(title);
-    markers.addLayer(marker);
-}
-
-map.addLayer(markers);
-
-</script>
+        map.addLayer(markers);
+    </script>
 </body>
+
 </html>

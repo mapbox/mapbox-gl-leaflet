@@ -28,5 +28,8 @@
   "homepage": "https://github.com/mapbox/mapbox-gl-leaflet",
   "devDependencies": {
     "jshint": "~2.5.5"
+  },
+  "dependencies": {
+    "prunecluster": "^2.0.0-beta.3"
   }
 }
