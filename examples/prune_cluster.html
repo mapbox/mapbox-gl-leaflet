@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <title>PruneCluster Example</title>
+    <meta charset="utf-8">
+    <style>
+        #map {
+            width: 800px;
+            height: 600px;
+        }
+    </style>
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.js"></script>
+
+    <!-- Mapbox GL -->
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js'></script>
+
+    <!-- Leaflet PruneCluster -->
+    <link href="../node_modules/prunecluster/dist/LeafletStyleSheet.css" rel='stylesheet' />
+    <script src="../node_modules/prunecluster/dist/PruneCluster.js"></script>
+
+    <!-- test data -->
+    <script src="https://www.mapbox.com/mapbox.js/assets/data/realworld.388.js"></script>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script src="../leaflet-mapbox-gl.js"></script>
+    <script>
+        var map = L.map('map', {
+            maxZoom: 17
+        }).setView([-37.821, 175.219], 16);
+
+        //OSM2VectorTiles does not need a token, only L.mapboxGL does but I'd set it optional givent the fact that
+        //it is possible to have free vector tiles (also on a GeoServer)
+        var gl = L.mapboxGL({
+            style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
+            accessToken: 'this_layer_does_not_need_a_token_only_the_lib_does'
+        }).addTo(map);
+
+        var pruneCluster = new PruneClusterForLeaflet();
+        var markers = [];
+
+        for (var i = 0; i < addressPoints.length; i++) {
+            var a = addressPoints[i];
+            var title = a[2];
+            var marker = new PruneCluster.Marker(a[0], a[1], {title: title});
+
+            markers.push(marker);
+            pruneCluster.RegisterMarker(marker);
+        }
+        map.addLayer(pruneCluster);
+        pruneCluster.ProcessView();
+
+    </script>
+</body>
+
+</html>
