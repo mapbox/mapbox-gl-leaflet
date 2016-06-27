@@ -21,6 +21,13 @@ var gl = L.mapboxGL({
     style: 'mapbox://styles/mapbox/bright-v8'
 }).addTo(map);
 ```
+Note that you can use any vector tile source useable by mapbox-gl. For instance, you can use [OSM2VectorTiles](http://osm2vectortiles.org/) with:
+```javascript
+var gl = L.mapboxGL({
+	style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
+	accessToken: 'no-token'
+}).addTo(map);
+```
 
 ## Live examples
 [Basic example](http://cdn.rawgit.com/mapbox/mapbox-gl-leaflet/master/examples/basic.html)
