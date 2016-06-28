@@ -55,7 +55,7 @@ You can also use Rawgit as a CDN using:
 ## Motivation
 This project makes it possible to easily add a mapbox-gl-js layer in your Leaflet map. When using mapbox-gl-leaflet, you won't be able to use some of the mapbox-gl-js features. 
 Here are the main differences between a "pure" mapbox-gl-js map and a Leaflet map using mapbox-gl-leaflet:
-- No rotation
+- No rotation / bearing / pitch support
 - No fractionnal zoom (hability to zoom between zoom levels)
 - Slower performances: When using mapbox-gl-leaflet, mapbox-gl-js is set as not interactive. Leaflet receives the touch/mouse events and updates the mapbox-gl-js map behind the scenes. Because mapbox-gl-js doesn't redraw as fast as Leaflet, the map can seem slower.
 
