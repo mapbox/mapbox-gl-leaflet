@@ -161,7 +161,7 @@ L.MapboxGL = L.Layer.extend({
       var scale = this._map.getZoomScale(e.zoom),
           offset = this._map._latLngToNewLayerPoint(this._map.getBounds().getNorthWest(), e.zoom, e.center);
 
-      L.DomUtil.setTransform(this._glMap._canvas.canvas, offset.subtract(this._offset), scale);
+      L.DomUtil.setTransform(this._glMap._canvas.canvas, offset.subtract(this._offset || L.point(0,0)), scale);
     },
 
     _zoomStart: function () {
