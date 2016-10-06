@@ -1,3 +1,31 @@
+function throttle(fn, time, context) {
+    var lock, args, wrapperFn, later;
+
+    later = function () {
+        // reset lock and call if queued
+        lock = false;
+        if (args) {
+            wrapperFn.apply(context, args);
+            args = false;
+        }
+    };
+
+    wrapperFn = function () {
+        if (lock) {
+            // called too soon, queue to call later
+            args = arguments;
+
+        } else {
+            // call and lock until later
+            fn.apply(context, arguments);
+            setTimeout(later, time);
+            lock = true;
+        }
+    };
+
+    return wrapperFn;
+};
+
 L.MapboxGL = L.Layer.extend({
     options: {
       updateInterval: 32
@@ -13,7 +41,7 @@ L.MapboxGL = L.Layer.extend({
         }
 
         // setup throttling the update event when panning
-        this._throttledUpdate = mapboxgl.util.throttle(L.Util.bind(this._update, this), this.options.updateInterval);
+        this._throttledUpdate = throttle(L.Util.bind(this._update, this), this.options.updateInterval);
     },
 
     onAdd: function (map) {
@@ -26,6 +54,8 @@ L.MapboxGL = L.Layer.extend({
         map._panes.tilePane.appendChild(this._glContainer);
 
         this._initGL();
+
+        this._offset = this._map.containerPointToLayerPoint([0, 0]);
     },
 
     onRemove: function (map) {
@@ -40,7 +70,6 @@ L.MapboxGL = L.Layer.extend({
             zoomanim: this._animateZoom, // applys the zoom animation to the <canvas>
             zoom: this._pinchZoom, // animate every zoom event for smoother pinch-zooming
             zoomstart: this._zoomStart, // flag starting a zoom to disable panning
-            zoomend: this._zoomEnd // reset the gl map view at the end of a zoom
         }
     },
 
@@ -74,8 +103,8 @@ L.MapboxGL = L.Layer.extend({
         this._glMap.transform.latRange = null;
 
         // treat child <canvas> element like L.ImageOverlay
-        L.DomUtil.addClass(this._glMap._canvas.canvas, 'leaflet-image-layer');
-        L.DomUtil.addClass(this._glMap._canvas.canvas, 'leaflet-zoom-animated');
+        L.DomUtil.addClass(this._getGlCanvas(), 'leaflet-image-layer');
+        L.DomUtil.addClass(this._getGlCanvas(), 'leaflet-zoom-animated');
     },
 
     _update: function (e) {
@@ -105,10 +134,34 @@ L.MapboxGL = L.Layer.extend({
         if (gl.transform.width !== size.x || gl.transform.height !== size.y) {
             container.style.width  = size.x + 'px';
             container.style.height = size.y + 'px';
-            gl.resize();
+            this._resizeGl();
         } else {
-            gl.update();
+          this._updateGl();
         }
+    },
+
+    _updateGl: function () {
+      if(this._glMap._update) {
+        this._glMap._update();
+      }
+
+      if(this._glMap.update) {
+        this._glMap.update();
+      }
+    },
+
+    _resizeGl: function () {
+      if(this._glMap._resize) {
+        this._glMap._resize();
+      }
+
+      if(this._glMap.resize) {
+        this._glMap.resize();
+      }
+    },
+
+    _getGlCanvas: function () {
+      return this._glMap._canvas.canvas || this._glMap._canvas;
     },
 
     // update the map constantly during a pinch zoom
@@ -124,34 +177,34 @@ L.MapboxGL = L.Layer.extend({
       var scale = this._map.getZoomScale(e.zoom),
           offset = this._map._latLngToNewLayerPoint(this._map.getBounds().getNorthWest(), e.zoom, e.center);
 
-      L.DomUtil.setTransform(this._glMap._canvas.canvas, offset.subtract(this._offset), scale);
-    },
+      L.DomUtil.setTransform(this._getGlCanvas(), offset.subtract(this._offset), scale);
 
-    _zoomStart: function () {
-      this._zooming = true;
-    },
-
-    _zoomEnd: function () {
-      var zoom = this._map.getZoom(),
+      // work around https://github.com/mapbox/mapbox-gl-leaflet/issues/47
+      L.DomEvent.on(this._map._proxy, L.DomUtil.TRANSITION_END, function (){
+        L.Util.requestAnimFrame(function () {
+          var zoom = this._map.getZoom(),
           center = this._map.getCenter(),
           offset = this._map.latLngToContainerPoint(this._map.getBounds().getNorthWest());
 
-      // update the map on the next available frame to avoid stuttering
-      L.Util.requestAnimFrame(function () {
-        // reset the scale and offset
-        L.DomUtil.setTransform(this._glMap._canvas.canvas, offset, 1);
+          // reset the scale and offset
+          L.DomUtil.setTransform(this._getGlCanvas(), offset, 1);
 
-        // enable panning once the gl map is ready again
-        this._glMap.once('moveend', L.Util.bind(function () {
-          this._zooming = false;
-        }, this));
+          // enable panning once the gl map is ready again
+          this._glMap.once('moveend', L.Util.bind(function () {
+            this._zooming = false;
+          }, this));
 
-        // update the map position
-        this._glMap.jumpTo({
-          center: center,
-          zoom: zoom - 1
-        });
+          // update the map position
+          this._glMap.jumpTo({
+            center: center,
+            zoom: zoom - 1
+          });
+        }, this);
       }, this);
+    },
+
+    _zoomStart: function (e) {
+      this._zooming = true;
     }
 });
 
