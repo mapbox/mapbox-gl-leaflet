@@ -40,6 +40,43 @@ L.MapboxGL = L.Layer.extend({
             throw new Error('You should provide a Mapbox GL access token as a token option.');
         }
 
+         /**
+         * Create a version of `fn` that only fires once every `time` millseconds.
+         *
+         * @param {Function} fn the function to be throttled
+         * @param {number} time millseconds required between function calls
+         * @param {*} context the value of `this` with which the function is called
+         * @returns {Function} debounced function
+         * @private
+         */
+        var throttle = function (fn, time, context) {
+            var lock, args, wrapperFn, later;
+
+            later = function () {
+                // reset lock and call if queued
+                lock = false;
+                if (args) {
+                    wrapperFn.apply(context, args);
+                    args = false;
+                }
+            };
+
+            wrapperFn = function () {
+                if (lock) {
+                    // called too soon, queue to call later
+                    args = arguments;
+
+                } else {
+                    // call and lock until later
+                    fn.apply(context, arguments);
+                    setTimeout(later, time);
+                    lock = true;
+                }
+            };
+
+            return wrapperFn;
+        };
+
         // setup throttling the update event when panning
         this._throttledUpdate = throttle(L.Util.bind(this._update, this), this.options.updateInterval);
     },
