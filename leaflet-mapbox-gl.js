@@ -78,7 +78,7 @@ L.MapboxGL = L.Layer.extend({
             zoom: this._pinchZoom, // animate every zoom event for smoother pinch-zooming
             zoomstart: this._zoomStart, // flag starting a zoom to disable panning
             zoomend: this._zoomEnd // reset the gl map view at the end of a zoom
-        }
+        };
     },
 
     addTo: function (map) {
