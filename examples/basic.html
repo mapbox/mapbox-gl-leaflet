@@ -5,8 +5,8 @@
     <style>#map { width: 800px; height: 600px; }</style>
 
     <!-- Leaflet -->
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" />
-    <script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v1.0.0/leaflet.js"></script>
 
     <!-- Mapbox GL -->
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.14.3/mapbox-gl.css" rel='stylesheet' />
@@ -22,6 +22,9 @@
 var token = location.hash.replace('#', '');
 if (!token) {
     token = prompt('Mapbox Access Token');
+    if (!token || token == ''){
+        alert("Please get your token from https://www.mapbox.com/studio/");        
+    }
 }
 
 var map = L.map('map').setView([38.912753, -77.032194], 15);
