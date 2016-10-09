@@ -7,6 +7,9 @@
 This is a binding from [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) to the familiar
 [Leaflet](http://leafletjs.com/) API.
 
-The leaflet-master branch is compatible with the latest leaflet releases (1.x), see https://github.com/mapbox/mapbox-gl-leaflet/tree/leaflet-master
+## Compatibility
+This branch is compatible with Leaflet 0.7.x versions. For a version compatible with leaflet 1.x, please check out the master branch of this project.
+
+This branch is compatible with early versions of mapbox-gl-js and might break as mapbox makes changes on the project. The master branch keeps compatibility with recent releases of mapbox-gl-js (>12)
 
 ## [Documentation](API.md)
