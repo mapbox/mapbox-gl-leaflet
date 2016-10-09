@@ -29,6 +29,9 @@ var gl = L.mapboxGL({
 }).addTo(map);
 ```
 
+## Get your Mapbox token
+Create a mapbox account, then head to [https://www.mapbox.com/studio/](https://www.mapbox.com/studio/) and copy your access token that was automatically created for you. The access token should start with "pk.".
+
 ## Live examples
 [Basic example](http://cdn.rawgit.com/mapbox/mapbox-gl-leaflet/master/examples/basic.html)
 
