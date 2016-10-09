@@ -52,7 +52,7 @@ Add a script tag referencing mapbox-gl-leaflet after adding leaflet in your webs
 ```
 You can also use Rawgit as a CDN using:
 ```html
-	<script src="//cdn.rawgit.com/mapbox/mapbox-gl-leaflet/master/leaflet-mapbox-gl.js"></script>
+<script src="//rawgit.com/mapbox/mapbox-gl-leaflet/master/leaflet-mapbox-gl.js"></script>
 ```
 
 ## Motivation
