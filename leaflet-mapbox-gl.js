@@ -1,6 +1,6 @@
 L.MapboxGL = L.Layer.extend({
     options: {
-      updateInterval: 16
+      updateInterval: 32
     },
 
     initialize: function (options) {
