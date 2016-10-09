@@ -29,10 +29,13 @@ var gl = L.mapboxGL({
 }).addTo(map);
 ```
 
-## Live examples
-[Basic example](http://cdn.rawgit.com/mapbox/mapbox-gl-leaflet/master/examples/basic.html)
+## Get your Mapbox token
+Create a mapbox account, then head to [https://www.mapbox.com/studio/](https://www.mapbox.com/studio/) and copy your access token that was automatically created for you. The access token should start with "pk.".
 
-[Cluster example](http://cdn.rawgit.com/mapbox/mapbox-gl-leaflet/master/examples/cluster.html)
+## Live examples
+[Basic example](http://rawgit.com/mapbox/mapbox-gl-leaflet/master/examples/basic.html)
+
+[Cluster example](http://rawgit.com/mapbox/mapbox-gl-leaflet/master/examples/cluster.html)
 
 Code for these examples is hosted in the [examples folder](https://github.com/mapbox/mapbox-gl-leaflet/tree/master/examples)
 
@@ -49,7 +52,7 @@ Add a script tag referencing mapbox-gl-leaflet after adding leaflet in your webs
 ```
 You can also use Rawgit as a CDN using:
 ```html
-	<script src="//cdn.rawgit.com/mapbox/mapbox-gl-leaflet/master/leaflet-mapbox-gl.js"></script>
+<script src="//rawgit.com/mapbox/mapbox-gl-leaflet/master/leaflet-mapbox-gl.js"></script>
 ```
 
 ## Motivation

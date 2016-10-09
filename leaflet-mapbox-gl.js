@@ -86,7 +86,7 @@ L.MapboxGL = L.Layer.extend({
             zoomanim: this._animateZoom, // applys the zoom animation to the <canvas>
             zoom: this._pinchZoom, // animate every zoom event for smoother pinch-zooming
             zoomstart: this._zoomStart, // flag starting a zoom to disable panning
-        }
+        };
     },
 
     _initContainer: function () {
