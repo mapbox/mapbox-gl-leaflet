@@ -18,15 +18,6 @@
 
 <script src="../leaflet-mapbox-gl.js"></script>
 <script>
-
-var token = location.hash.replace('#', '');
-if (!token) {
-    token = prompt('Mapbox Access Token');
-    if (!token || token == ''){
-        alert("Please get your token from https://www.mapbox.com/studio/");        
-    }
-}
-
 var map = L.map('map').setView([38.912753, -77.032194], 15);
 
 L.marker([38.912753, -77.032194])
@@ -35,8 +26,8 @@ L.marker([38.912753, -77.032194])
     .openPopup();
 
 var gl = L.mapboxGL({
-    accessToken: token,
-    style: 'mapbox://styles/mapbox/streets-v8'
+    accessToken: 'no-token',
+    style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json'
 }).addTo(map);
 
 </script>
