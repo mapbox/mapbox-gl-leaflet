@@ -82,6 +82,9 @@ L.MapboxGL = L.Class.extend({
             container.style.width  = size.x + 'px';
             container.style.height = size.y + 'px';
             gl.resize();
+        } else if (this.lastZoom !== tr.zoom) {
+            this.lastZoom = tr.zoom;
+            gl.resize();
         } else {
             gl._update();
         }
