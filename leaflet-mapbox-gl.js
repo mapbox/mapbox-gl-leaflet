@@ -67,6 +67,10 @@ L.MapboxGL = L.Class.extend({
             gl = this._glMap,
             topLeft = this._map.containerPointToLayerPoint([0, 0]);
 
+        if (!(gl && gl.transform && container && container.style)) {
+            return;
+        }
+
         L.DomUtil.setPosition(container, topLeft);
         
         var center = this._map.getCenter();
