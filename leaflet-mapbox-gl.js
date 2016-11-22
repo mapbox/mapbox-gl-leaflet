@@ -66,13 +66,13 @@ L.MapboxGL = L.Layer.extend({
 
         // work around https://github.com/mapbox/mapbox-gl-leaflet/issues/47
         if (map.options.zoomAnimation) {
-            L.DomEvent.on(map._proxy, L.DomUtil.TRANSITION_END, this._zoomEnd, this);
+            L.DomEvent.on(map._proxy, L.DomUtil.TRANSITION_END, this._transitionEnd, this);
         }
     },
 
     onRemove: function (map) {
         if (this._map.options.zoomAnimation) {
-            L.DomEvent.off(this._map._proxy, L.DomUtil.TRANSITION_END, this._zoomEnd, this);
+            L.DomEvent.off(this._map._proxy, L.DomUtil.TRANSITION_END, this._transitionEnd, this);
         }
 
         map.getPanes().tilePane.removeChild(this._glContainer);
@@ -86,6 +86,7 @@ L.MapboxGL = L.Layer.extend({
             zoomanim: this._animateZoom, // applys the zoom animation to the <canvas>
             zoom: this._pinchZoom, // animate every zoom event for smoother pinch-zooming
             zoomstart: this._zoomStart, // flag starting a zoom to disable panning
+            zoomend: this._zoomEnd
         };
     },
 
@@ -171,7 +172,14 @@ L.MapboxGL = L.Layer.extend({
       this._zooming = true;
     },
 
-    _zoomEnd: function (e) {
+    _zoomEnd: function () {
+      var scale = this._map.getZoomScale(this._map.getZoom()),
+          offset = this._map._latLngToNewLayerPoint(this._map.getBounds().getNorthWest(), this._map.getZoom(), this._map.getCenter());
+
+      L.DomUtil.setTransform(this._glMap._canvas, offset.subtract(this._offset), scale);
+    },
+
+    _transitionEnd: function (e) {
       L.Util.requestAnimFrame(function () {
           var zoom = this._map.getZoom(),
           center = this._map.getCenter(),
@@ -183,6 +191,7 @@ L.MapboxGL = L.Layer.extend({
           // enable panning once the gl map is ready again
           this._glMap.once('moveend', L.Util.bind(function () {
               this._zooming = false;
+              this._zoomEnd();
           }, this));
 
           // update the map position
