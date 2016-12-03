@@ -146,7 +146,11 @@ L.MapboxGL = L.Layer.extend({
         if (gl.transform.width !== size.x || gl.transform.height !== size.y) {
             container.style.width  = size.x + 'px';
             container.style.height = size.y + 'px';
-            gl._resize !== null ? gl._resize() : gl.resize();
+            if (gl._resize !== null){
+                gl._resize();    
+            } else {
+                gl.resize();    
+            }
         } else {
           gl._update();
         }
