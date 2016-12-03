@@ -199,7 +199,7 @@ L.MapboxGL = L.Layer.extend({
               center: center,
               zoom: zoom - 1
           });
-      }, this)
+      }, this);
     }
 });
 
