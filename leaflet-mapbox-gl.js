@@ -181,6 +181,8 @@ L.MapboxGL = L.Layer.extend({
           offset = this._map._latLngToNewLayerPoint(this._map.getBounds().getNorthWest(), this._map.getZoom(), this._map.getCenter());
 
       L.DomUtil.setTransform(this._glMap._canvas, offset.subtract(this._offset), scale);
+
+      this._zooming = false;
     },
 
     _transitionEnd: function (e) {
@@ -194,7 +196,6 @@ L.MapboxGL = L.Layer.extend({
 
           // enable panning once the gl map is ready again
           this._glMap.once('moveend', L.Util.bind(function () {
-              this._zooming = false;
               this._zoomEnd();
           }, this));
 
