@@ -114,9 +114,17 @@ L.MapboxGL = L.Layer.extend({
         // allow GL base map to pan beyond min/max latitudes
         this._glMap.transform.latRange = null;
 
+        if (this._glMap._canvas.canvas) {
+            // older versions of mapbox-gl surfaced the canvas differently
+            this._glMap._actualCanvas = this._glMap._canvas.canvas;
+        } else {
+            this._glMap._actualCanvas = this._glMap._canvas;
+        }
+
         // treat child <canvas> element like L.ImageOverlay
-        L.DomUtil.addClass(this._glMap._canvas, 'leaflet-image-layer');
-        L.DomUtil.addClass(this._glMap._canvas, 'leaflet-zoom-animated');
+        L.DomUtil.addClass(this._glMap._actualCanvas, 'leaflet-image-layer');
+        L.DomUtil.addClass(this._glMap._actualCanvas, 'leaflet-zoom-animated');
+
     },
 
     _update: function (e) {
@@ -147,12 +155,17 @@ L.MapboxGL = L.Layer.extend({
             container.style.width  = size.x + 'px';
             container.style.height = size.y + 'px';
             if (gl._resize !== null && gl._resize !== undefined){
-                gl._resize();    
+                gl._resize();
             } else {
-                gl.resize();    
+                gl.resize();
             }
         } else {
-          gl._update();
+            // older versions of mapbox-gl surfaced update publicly
+            if (gl._update !== null && gl._update !== undefined){
+                gl._update();
+            } else {
+                gl.update();
+            }
         }
     },
 
@@ -169,7 +182,7 @@ L.MapboxGL = L.Layer.extend({
       var scale = this._map.getZoomScale(e.zoom),
           offset = this._map._latLngToNewLayerPoint(this._map.getBounds().getNorthWest(), e.zoom, e.center);
 
-      L.DomUtil.setTransform(this._glMap._canvas, offset.subtract(this._offset), scale);
+      L.DomUtil.setTransform(this._glMap._actualCanvas, offset.subtract(this._offset), scale);
     },
 
     _zoomStart: function (e) {
@@ -180,7 +193,7 @@ L.MapboxGL = L.Layer.extend({
       var scale = this._map.getZoomScale(this._map.getZoom()),
           offset = this._map._latLngToNewLayerPoint(this._map.getBounds().getNorthWest(), this._map.getZoom(), this._map.getCenter());
 
-      L.DomUtil.setTransform(this._glMap._canvas, offset.subtract(this._offset), scale);
+      L.DomUtil.setTransform(this._glMap._actualCanvas, offset.subtract(this._offset), scale);
 
       this._zooming = false;
     },
@@ -192,7 +205,7 @@ L.MapboxGL = L.Layer.extend({
           offset = this._map.latLngToContainerPoint(this._map.getBounds().getNorthWest());
 
           // reset the scale and offset
-          L.DomUtil.setTransform(this._glMap._canvas, offset, 1);
+          L.DomUtil.setTransform(this._glMap._actualCanvas, offset, 1);
 
           // enable panning once the gl map is ready again
           this._glMap.once('moveend', L.Util.bind(function () {
