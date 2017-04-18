@@ -17,10 +17,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Introduced support for Leaflet `v1.0.x`
 
-## 0.7.0 - 2016-10-09
+## 0.7. - 2016-10-09
 
 - Compatibility release for Leaflet `v0.7.x`
 
 [Unreleased]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.3...HEAD
 [0.0.3]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.2...v0.0.3
-[0.0.2]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.7.0...v0.0.2
+[0.0.2]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.7...v0.0.2
