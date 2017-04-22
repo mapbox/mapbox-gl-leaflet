@@ -28,6 +28,12 @@ var gl = L.mapboxGL({
 	accessToken: 'no-token'
 }).addTo(map);
 ```
+Once you have created the leaflet layer, the mapbox-gl map object can be accessed using
+```javascript
+gl._glMap...
+// add a source to the mapbox-gl layer
+gl._glMap.addSource({...})
+```
 
 ## Get your Mapbox token
 Create a mapbox account, then head to [https://www.mapbox.com/studio/](https://www.mapbox.com/studio/) and copy your access token that was automatically created for you. The access token should start with "pk.".
