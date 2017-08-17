@@ -1,15 +1,15 @@
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD
-        define(['leaflet'], factory);
+        define(['leaflet', 'mapbox-gl'], factory);
     } else if (typeof exports === 'object') {
         // Node, CommonJS-like
-        module.exports = factory(require('leaflet'));
+        module.exports = factory(require('leaflet'), require('mapbox-gl'));
     } else {
         // Browser globals (root is window)
-        root.returnExports = factory(root, window.L);
+        root.returnExports = factory(window.L, window.mapboxgl);
     }
-}(this, function (L) {
+}(this, function (L, mapboxgl) {
     L.MapboxGL = L.Layer.extend({
         options: {
         updateInterval: 32
