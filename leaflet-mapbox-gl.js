@@ -70,7 +70,7 @@
                 this._initContainer();
             }
 
-            map._panes.tilePane.appendChild(this._glContainer);
+            this.getPane().appendChild(this._glContainer);
 
             this._initGL();
 
