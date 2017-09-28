@@ -87,7 +87,7 @@
                 L.DomEvent.off(this._map._proxy, L.DomUtil.TRANSITION_END, this._transitionEnd, this);
             }
 
-            map.getPanes().tilePane.removeChild(this._glContainer);
+            this.getPane().removeChild(this._glContainer);
             this._glMap.remove();
             this._glMap = null;
         },
