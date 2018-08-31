@@ -83,7 +83,7 @@
         },
 
         onRemove: function (map) {
-            if (this._map.options.zoomAnimation) {
+            if (this._map._proxy && this._map.options.zoomAnimation) {
                 L.DomEvent.off(this._map._proxy, L.DomUtil.TRANSITION_END, this._transitionEnd, this);
             }
 
