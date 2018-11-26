@@ -56,9 +56,9 @@ Add a script tag referencing mapbox-gl-leaflet after adding leaflet in your webs
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.14.3/mapbox-gl.css' rel='stylesheet' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.14.3/mapbox-gl.js'></script>
 ```
-You can also use Rawgit as a CDN using:
+You can also use Unpkg as a CDN using:
 ```html
-<script src="//rawgit.com/mapbox/mapbox-gl-leaflet/master/leaflet-mapbox-gl.js"></script>
+<script src="https://unpkg.com/mapbox-gl-leaflet@0.0.3/leaflet-mapbox-gl.js"></script>
 ```
 
 ## Motivation
