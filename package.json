@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/mapbox/mapbox-gl-leaflet",
   "devDependencies": {
-    "gh-release": "^2.2.1",
-    "jshint": "~2.5.5"
+    "gh-release": "^3.5.0",
+    "jshint": "^2.10.1"
   }
 }
