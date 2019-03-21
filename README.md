@@ -79,4 +79,4 @@ Please use the [issue tracker](https://github.com/mapbox/mapbox-gl-leaflet/issue
 You can fork this [jsfiddle template](https://jsfiddle.net/fnicollet/9w9er53v/) to reproduce a bug, then share the URL of your fork in the GitHub issue.
 
 ## Licence
-The MIT License (MIT)
+ISC © [Mapbox](https://github.com/mapbox)
