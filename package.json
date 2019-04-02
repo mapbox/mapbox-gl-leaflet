@@ -29,5 +29,9 @@
   "devDependencies": {
     "gh-release": "^3.5.0",
     "jshint": "^2.10.1"
+  },
+  "dependencies": {
+    "leaflet": "^1.4.0",
+    "mapbox-gl": "^0.53.1"
   }
 }
