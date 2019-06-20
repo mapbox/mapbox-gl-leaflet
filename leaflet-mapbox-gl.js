@@ -208,6 +208,8 @@
         L.DomUtil.setTransform(this._glMap._actualCanvas, offset.subtract(this._offset), scale);
 
         this._zooming = false;
+
+        this._update();
         },
 
         _transitionEnd: function (e) {
