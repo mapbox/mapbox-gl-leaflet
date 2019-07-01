@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.0.7] - 2019-07-01
+
+### Fixed
+
+- Ensure no blank/gray area is displayed when zooming out.
+
 ## [0.0.6] - 2019-05-07
 
 ### Fixed
@@ -45,7 +51,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Compatibility release for Leaflet `v0.7.x`
 
-[Unreleased]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.6...HEAD
+[Unreleased]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.7...HEAD
+[0.0.7]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.3...v0.0.4
