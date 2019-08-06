@@ -12,7 +12,10 @@
 }(this, function (L, mapboxgl) {
     L.MapboxGL = L.Layer.extend({
         options: {
-        updateInterval: 32
+        updateInterval: 32,
+		// How much to extend the overlay view (relative to map size)
+		// e.g. 0.15 would be 15% of map view in each direction
+        padding: 0.15
         },
 
         initialize: function (options) {
@@ -24,45 +27,8 @@
                 throw new Error('You should provide a Mapbox GL access token as a token option.');
             }
 
-            /**
-             * Create a version of `fn` that only fires once every `time` millseconds.
-             *
-             * @param {Function} fn the function to be throttled
-             * @param {number} time millseconds required between function calls
-             * @param {*} context the value of `this` with which the function is called
-             * @returns {Function} debounced function
-             * @private
-             */
-            var throttle = function (fn, time, context) {
-                var lock, args, wrapperFn, later;
-
-                later = function () {
-                    // reset lock and call if queued
-                    lock = false;
-                    if (args) {
-                        wrapperFn.apply(context, args);
-                        args = false;
-                    }
-                };
-
-                wrapperFn = function () {
-                    if (lock) {
-                        // called too soon, queue to call later
-                        args = arguments;
-
-                    } else {
-                        // call and lock until later
-                        fn.apply(context, arguments);
-                        setTimeout(later, time);
-                        lock = true;
-                    }
-                };
-
-                return wrapperFn;
-            };
-
             // setup throttling the update event when panning
-            this._throttledUpdate = throttle(L.Util.bind(this._update, this), this.options.updateInterval);
+            this._throttledUpdate = L.Util.throttle(this._update, this.options.updateInterval, this);
         },
 
         onAdd: function (map) {
@@ -102,12 +68,21 @@
             };
         },
 
+        _getSize: function () {
+            return this._map.getSize().multiplyBy(1 + this.options.padding * 2);
+        },
+
         _initContainer: function () {
             var container = this._glContainer = L.DomUtil.create('div', 'leaflet-gl-layer');
 
-            var size = this._map.getSize();
+            var size = this._getSize();
+            var offset = this._map.getSize().multiplyBy(this.options.padding);
             container.style.width  = size.x + 'px';
             container.style.height = size.y + 'px';
+
+            var topLeft = this._map.containerPointToLayerPoint([0, 0]).subtract(offset);
+
+            L.DomUtil.setPosition(container, topLeft);
         },
 
         _initGL: function () {
@@ -147,10 +122,11 @@
             return;
             }
 
-            var size = this._map.getSize(),
+            var size = this._getSize(),
                 container = this._glContainer,
                 gl = this._glMap,
-                topLeft = this._map.containerPointToLayerPoint([0, 0]);
+                offset = this._map.getSize().multiplyBy(this.options.padding),
+                topLeft = this._map.containerPointToLayerPoint([0, 0]).subtract(offset);
 
             L.DomUtil.setPosition(container, topLeft);
 
@@ -191,10 +167,19 @@
 
         // borrowed from L.ImageOverlay https://github.com/Leaflet/Leaflet/blob/master/src/layer/ImageOverlay.js#L139-L144
         _animateZoom: function (e) {
-        var scale = this._map.getZoomScale(e.zoom),
-            offset = this._map._latLngToNewLayerPoint(this._map.getBounds().getNorthWest(), e.zoom, e.center);
+            var scale = this._map.getZoomScale(e.zoom);
+            var padding = this._map.getSize().multiplyBy(this.options.padding * scale);
+            var viewHalf = this._getSize()._divideBy(2);
+            // corrections for padding (scaled), adapted from
+            // https://github.com/Leaflet/Leaflet/blob/master/src/map/Map.js#L1490-L1508
+            var topLeft = this._map.project(e.center, e.zoom)
+                ._subtract(viewHalf)
+                ._add(this._map._getMapPanePos()
+                .add(padding))._round();
+            var offset = this._map.project(this._map.getBounds().getNorthWest(), e.zoom)
+                ._subtract(topLeft);
 
-        L.DomUtil.setTransform(this._glMap._actualCanvas, offset.subtract(this._offset), scale);
+            L.DomUtil.setTransform(this._glMap._actualCanvas, offset.subtract(this._offset), scale);
         },
 
         _zoomStart: function (e) {
