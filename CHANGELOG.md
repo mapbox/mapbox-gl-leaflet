@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.0.8] - 2019-08-07
+
+## Added
+
+- Added a `padding` option to fix the grey backgrougd flickering around the edges of the map while panning/zooming
+- bumped the libraries in examples
+
 ## [0.0.7] - 2019-07-01
 
 ### Fixed

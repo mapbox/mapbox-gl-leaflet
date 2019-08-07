@@ -11,6 +11,7 @@ for the full range.
 | Option | Value | Description |
 | ---- | ---- | ---- |
 | accessToken | string | **Required**: a [Mapbox access token](https://www.mapbox.com/help/define-access-token/) to identify requests for map resources |
+| padding | number | [0.15] | Relative padding of the mapbox-gl layer to avoid the background flickering around the edges of the map |
 
 ### `layer.addTo(map)`
 
