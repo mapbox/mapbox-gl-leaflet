@@ -9,7 +9,7 @@ This is a binding from [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) 
 
 ## Code example
 ```javascript
-var token ="pk.XXXX"; // replace with your Mapbox API Access token. Create a Mabpox account and find it on https://www.mapbox.com/studio/
+var token ="pk.XXXX"; // replace with your Mapbox API Access token. Create a Mapbox account and find it on https://account.mapbox.com/
 
 var map = L.map('map').setView([38.912753, -77.032194], 15);
 L.marker([38.912753, -77.032194])
