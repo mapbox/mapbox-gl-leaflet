@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.0.9] - 2019-09-02
+
+## Added
+
+- Added `interactive` option to make `mapbox-gl` map events handling possible.
+- added public accessor to `mapbox-gl` map object
+
 ## [0.0.8] - 2019-08-07
 
 ## Added
