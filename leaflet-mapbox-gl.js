@@ -14,8 +14,8 @@
             options: {
             updateInterval: 32,
             // How much to extend the overlay view (relative to map size)
-            // e.g. 0.15 would be 15% of map view in each direction
-            padding: 0.15,
+            // e.g. 0.1 would be 10% of map view in each direction
+            padding: 0.1,
             // whether or not to register the mouse and keyboard
             // events on the mapbox overlay
             interactive: false
