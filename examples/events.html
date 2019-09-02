@@ -37,25 +37,26 @@
     style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
     interactive: true
   }).addTo(leafletMap);
-  console.log(gl._glMap);
 
-  gl._glMap.on('load', () => {
+  var mapboxMap = gl.getMapboxMap();
+
+  mapboxMap.on('load', () => {
     console.log('MAPBOX map loaded');
 
     // let's see events on mapbox map
-    gl._glMap.on('mousemove', () => { console.log('MAPBOX mousemove') });
-    gl._glMap.on('mouseenter', () => { console.log('MAPBOX mouseenter') });
-    gl._glMap.on('mouseout', () => { console.log('MAPBOX mouseout') });
-    gl._glMap.on('mouseleave', () => { console.log('MAPBOX mouseleave') });
-    gl._glMap.on('mouseover', () => { console.log('MAPBOX mouseover') });
+    mapboxMap.on('mousemove', () => { console.log('MAPBOX mousemove') });
+    mapboxMap.on('mouseenter', () => { console.log('MAPBOX mouseenter') });
+    mapboxMap.on('mouseout', () => { console.log('MAPBOX mouseout') });
+    mapboxMap.on('mouseleave', () => { console.log('MAPBOX mouseleave') });
+    mapboxMap.on('mouseover', () => { console.log('MAPBOX mouseover') });
 
     // let's add some layer and fire events on it
 
-    gl._glMap.addSource('states', {
+    mapboxMap.addSource('states', {
       'type': 'geojson',
       'data': 'https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson'
     });
-    gl._glMap.addLayer({
+    mapboxMap.addLayer({
       'id': 'state-fills',
       'type': 'fill',
       'source': 'states',
@@ -66,10 +67,10 @@
       }
     });
 
-    gl._glMap.on('mouseenter', 'state-fills', (e) => {console.log('state-fills mouseenter', e) });
-    gl._glMap.on('mousemove', 'state-fills', (e) => {console.log('state-fills mousemove', e) });
-    gl._glMap.on('mouseout', 'state-fills', (e) => {console.log('state-fills mouseout', e) });
-    gl._glMap.on('mouseleave', 'state-fills', (e) => {console.log('state-fills mouseleave', e) });
+    mapboxMap.on('mouseenter', 'state-fills', (e) => {console.log('state-fills mouseenter', e) });
+    mapboxMap.on('mousemove', 'state-fills', (e) => {console.log('state-fills mousemove', e) });
+    mapboxMap.on('mouseout', 'state-fills', (e) => {console.log('state-fills mouseout', e) });
+    mapboxMap.on('mouseleave', 'state-fills', (e) => {console.log('state-fills mouseleave', e) });
 
   });
 

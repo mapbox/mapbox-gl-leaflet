@@ -71,6 +71,10 @@
             };
         },
 
+        getMapboxMap: function () {
+            return this._glMap;
+        },
+
         _getSize: function () {
             return this._map.getSize().multiplyBy(1 + this.options.padding * 2);
         },
