@@ -30,9 +30,9 @@ var gl = L.mapboxGL({
 ```
 Once you have created the leaflet layer, the mapbox-gl map object can be accessed using
 ```javascript
-gl._glMap...
+gl.getMapboxMap()....
 // add a source to the mapbox-gl layer
-gl._glMap.addSource({...})
+gl.getMapboxMap().addSource({...})
 ```
 
 ## Get your Mapbox token

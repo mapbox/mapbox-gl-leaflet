@@ -19,6 +19,6 @@ for the full range.
 Same behavior as `.addTo` on any Leaflet layer: this adds the layer to a given
 map or group.
 
-### `layer.mapboxMap()`
+### `layer.getMapboxMap()`
 
 Returns `mapbox-gl.Map` object.
