@@ -15,7 +15,10 @@
             updateInterval: 32,
             // How much to extend the overlay view (relative to map size)
             // e.g. 0.15 would be 15% of map view in each direction
-            padding: 0.15
+            padding: 0.15,
+            // whether or not to register the mouse and keyboard
+            // events on the mapbox overlay
+            interactive: false
         },
 
         initialize: function (options) {
@@ -90,7 +93,6 @@
 
             var options = L.extend({}, this.options, {
                 container: this._glContainer,
-                interactive: false,
                 center: [center.lng, center.lat],
                 zoom: this._map.getZoom() - 1,
                 attributionControl: false
@@ -109,9 +111,11 @@
             }
 
             // treat child <canvas> element like L.ImageOverlay
-            L.DomUtil.addClass(this._glMap._actualCanvas, 'leaflet-image-layer');
-            L.DomUtil.addClass(this._glMap._actualCanvas, 'leaflet-zoom-animated');
-
+            var canvas = this._glMap._actualCanvas;
+            L.DomUtil.addClass(canvas, 'leaflet-image-layer');
+            L.DomUtil.addClass(canvas, 'leaflet-zoom-animated');
+            if (this.options.interactive) L.DomUtil.addClass(canvas, 'leaflet-interactive');
+            if (this.options.className) L.DomUtil.addClass(canvas, this.options.className);
         },
 
         _update: function (e) {

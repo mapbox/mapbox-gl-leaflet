@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebGL</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      html, body, #map {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+    <!-- Mapbox GL -->
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css" rel='stylesheet' />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js"></script>
+  </head>
+  <body>
+  <div id="map"></div>
+  <script src="../leaflet-mapbox-gl.js"></script>
+  <script>
+  var leafletMap = L.map('map').setView([38.912753, -77.032194], 2);
+
+  L.marker([38.912753, -77.032194])
+    .bindPopup("Hello <b>Leaflet GL</b>!<br>Whoa, it works!")
+    .addTo(leafletMap)
+    .openPopup();
+
+  var gl = L.mapboxGL({
+    padding: 0.1,
+    accessToken: 'no-token',
+    style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
+    interactive: true
+  }).addTo(leafletMap);
+  console.log(gl._glMap);
+
+  gl._glMap.on('load', () => {
+    console.log('MAPBOX map loaded');
+
+    // let's see events on mapbox map
+    gl._glMap.on('mousemove', () => { console.log('MAPBOX mousemove') });
+    gl._glMap.on('mouseenter', () => { console.log('MAPBOX mouseenter') });
+    gl._glMap.on('mouseout', () => { console.log('MAPBOX mouseout') });
+    gl._glMap.on('mouseleave', () => { console.log('MAPBOX mouseleave') });
+    gl._glMap.on('mouseover', () => { console.log('MAPBOX mouseover') });
+
+    // let's add some layer and fire events on it
+
+    gl._glMap.addSource('states', {
+      'type': 'geojson',
+      'data': 'https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson'
+    });
+    gl._glMap.addLayer({
+      'id': 'state-fills',
+      'type': 'fill',
+      'source': 'states',
+      'layout': {},
+      'paint': {
+        'fill-color': '#627BC1',
+        'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 1, 0.5 ]
+      }
+    });
+
+    gl._glMap.on('mouseenter', 'state-fills', (e) => {console.log('state-fills mouseenter', e) });
+    gl._glMap.on('mousemove', 'state-fills', (e) => {console.log('state-fills mousemove', e) });
+    gl._glMap.on('mouseout', 'state-fills', (e) => {console.log('state-fills mouseout', e) });
+    gl._glMap.on('mouseleave', 'state-fills', (e) => {console.log('state-fills mouseleave', e) });
+
+  });
+
+  // now let's see on leaflet map events
+  // SPOILER: they are works
+  leafletMap.on('mousemove', () => { console.log('LEAFLET mousemove') });
+  leafletMap.on('mouseenter', () => { console.log('LEAFLET mouseenter') });
+  leafletMap.on('mouseout', () => { console.log('LEAFLET mouseout') });
+  leafletMap.on('mouseleave', () => { console.log('LEAFLET mouseleave') });
+  leafletMap.on('mouseover', () => { console.log('LEAFLET mouseover') });
+    </script>
+  </body>
+</html>
