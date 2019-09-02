@@ -12,8 +12,13 @@ for the full range.
 | ---- | ---- | ---- |
 | accessToken | string | **Required**: a [Mapbox access token](https://www.mapbox.com/help/define-access-token/) to identify requests for map resources |
 | padding | number | [0.15] | Relative padding of the mapbox-gl layer to avoid the background flickering around the edges of the map |
+| interactive | boolean | [false] | Wheter or not to register the mouse and keyboard events on the mapbox-gl layer. Turn this on if you intend to use the mapbox-gl layer events. |
 
 ### `layer.addTo(map)`
 
 Same behavior as `.addTo` on any Leaflet layer: this adds the layer to a given
 map or group.
+
+### `layer.getMapboxMap()`
+
+Returns `mapbox-gl.Map` object.

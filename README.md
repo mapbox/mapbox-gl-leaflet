@@ -30,9 +30,9 @@ var gl = L.mapboxGL({
 ```
 Once you have created the leaflet layer, the mapbox-gl map object can be accessed using
 ```javascript
-gl._glMap...
+gl.getMapboxMap()....
 // add a source to the mapbox-gl layer
-gl._glMap.addSource({...})
+gl.getMapboxMap().addSource({...})
 ```
 
 ## Get your Mapbox token
@@ -43,6 +43,8 @@ Create a mapbox account, then head to [https://www.mapbox.com/studio/](https://w
 
 [Cluster example](http://rawgit.com/mapbox/mapbox-gl-leaflet/master/examples/cluster.html)
 
+[Map events example](http://rawgit.com/mapbox/mapbox-gl-leaflet/master/examples/events.html)
+
 Code for these examples is hosted in the [examples folder](https://github.com/mapbox/mapbox-gl-leaflet/tree/master/examples)
 
 ## Installation
@@ -51,7 +53,7 @@ Add a script tag referencing mapbox-gl-leaflet after adding leaflet in your webs
 <link rel="stylesheet" href="leaflet.css" />
 <script src="leaflet.js"></script>
 <script src="leaflet-mapbox-gl.js"></script>
-	
+
 <!-- Mapbox GL -->
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.14.3/mapbox-gl.css' rel='stylesheet' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.14.3/mapbox-gl.js'></script>
@@ -62,7 +64,7 @@ You can also use Unpkg as a CDN using:
 ```
 
 ## Motivation
-This project makes it possible to easily add a mapbox-gl-js layer in your Leaflet map. When using mapbox-gl-leaflet, you won't be able to use some of the mapbox-gl-js features. 
+This project makes it possible to easily add a mapbox-gl-js layer in your Leaflet map. When using mapbox-gl-leaflet, you won't be able to use some of the mapbox-gl-js features.
 Here are the main differences between a "pure" mapbox-gl-js map and a Leaflet map using mapbox-gl-leaflet:
 - No rotation / bearing / pitch support
 - Slower performances: When using mapbox-gl-leaflet, mapbox-gl-js is set as not interactive. Leaflet receives the touch/mouse events and updates the mapbox-gl-js map behind the scenes. Because mapbox-gl-js doesn't redraw as fast as Leaflet, the map can seem slower.

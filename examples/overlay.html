@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>Leaflet debug page</title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+  <!-- Mapbox GL -->
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css" rel='stylesheet' />
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js"></script>
+  <script src="../leaflet-mapbox-gl.js"></script>
+  <style>
+    html, body, #map {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+	<div id="map"></div>
+
+	<script>
+    var map = new L.Map('map');
+		var gl = L.mapboxGL({
+      accessToken: 'no-token',
+      style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json'
+    }).addTo(map);
+
+		var	bounds = new L.LatLngBounds(
+			new L.LatLng(40.71222,-74.22655),
+			new L.LatLng(40.77394,-74.12544));
+		map.fitBounds(bounds);
+		var overlay = new L.ImageOverlay("https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg", bounds, {
+			opacity: 0.5,
+			interactive: true,
+			attribution: '&copy; A.B.B Corp.'
+		});
+		map.addLayer(overlay);
+		overlay.on('dblclick',function (e) {
+			console.log('Double click on image.');
+		});
+	</script>
+</body>
+</html>
