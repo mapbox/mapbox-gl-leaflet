@@ -114,8 +114,12 @@
             var canvas = this._glMap._actualCanvas;
             L.DomUtil.addClass(canvas, 'leaflet-image-layer');
             L.DomUtil.addClass(canvas, 'leaflet-zoom-animated');
-            if (this.options.interactive) L.DomUtil.addClass(canvas, 'leaflet-interactive');
-            if (this.options.className) L.DomUtil.addClass(canvas, this.options.className);
+            if (this.options.interactive) {
+                L.DomUtil.addClass(canvas, 'leaflet-interactive');
+            }
+            if (this.options.className) {
+                L.DomUtil.addClass(canvas, this.options.className);
+            }
         },
 
         _update: function (e) {
