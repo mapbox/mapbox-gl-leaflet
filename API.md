@@ -19,6 +19,22 @@ for the full range.
 Same behavior as `.addTo` on any Leaflet layer: this adds the layer to a given
 map or group.
 
-### `layer.getMapboxMap()`
+### `layer.getMapboxMap(): mapbox.Map`
 
 Returns `mapbox-gl.Map` object.
+
+### `layer.getContainer(): HTMLDivElement`
+
+Returns layer's DOM container `div`.
+
+### `layer.getCanvas(): HTMLCanvasElement`
+
+Returns `mapbox-gl.Map` canvas.
+
+### `layer.getSize(): L.Point`
+
+Returns layer size in pixels including padding.
+
+### `layer.getBounds(): L.LatLngBounds`
+
+Returns layer bounds including padding.
