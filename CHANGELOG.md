@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.0.10] - 2019-09-16
+
+ - added `.getContainer()`, `.getSize()`, `getBounds()` and `getCanvas()` methods.
+ - internal code changes to bring it closer to other overlay layers.
+
 ## [0.0.9] - 2019-09-02
 
 ## Added

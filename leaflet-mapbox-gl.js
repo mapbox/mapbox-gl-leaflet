@@ -35,11 +35,11 @@
         },
 
         onAdd: function (map) {
-            if (!this._glContainer) {
+            if (!this._container) {
                 this._initContainer();
             }
 
-            this.getPane().appendChild(this._glContainer);
+            this.getPane().appendChild(this._container);
 
             this._initGL();
 
@@ -56,7 +56,7 @@
                 L.DomEvent.off(this._map._proxy, L.DomUtil.TRANSITION_END, this._transitionEnd, this);
             }
 
-            this.getPane().removeChild(this._glContainer);
+            this.getPane().removeChild(this._container);
             this._glMap.remove();
             this._glMap = null;
         },
@@ -75,14 +75,31 @@
             return this._glMap;
         },
 
-        _getSize: function () {
+        getCanvas: function () {
+            return this._glMap.getCanvas();
+        },
+
+        getSize: function () {
             return this._map.getSize().multiplyBy(1 + this.options.padding * 2);
         },
 
-        _initContainer: function () {
-            var container = this._glContainer = L.DomUtil.create('div', 'leaflet-gl-layer');
+        getBounds: function () {
+            var halfSize = this.getSize().multiplyBy(0.5);
+            var center = this._map.latLngToContainerPoint(this._map.getCenter());
+            return L.latLngBounds(
+                this._map.containerPointToLatLng(center.subtract(halfSize)),
+                this._map.containerPointToLatLng(center.add(halfSize))
+            );
+        },
 
-            var size = this._getSize();
+        getContainer: function () {
+            return this._container;
+        },
+
+        _initContainer: function () {
+            var container = this._container = L.DomUtil.create('div', 'leaflet-gl-layer');
+
+            var size = this.getSize();
             var offset = this._map.getSize().multiplyBy(this.options.padding);
             container.style.width  = size.x + 'px';
             container.style.height = size.y + 'px';
@@ -96,7 +113,7 @@
             var center = this._map.getCenter();
 
             var options = L.extend({}, this.options, {
-                container: this._glContainer,
+                container: this._container,
                 center: [center.lng, center.lat],
                 zoom: this._map.getZoom() - 1,
                 attributionControl: false
@@ -134,8 +151,8 @@
                 return;
             }
 
-            var size = this._getSize(),
-                container = this._glContainer,
+            var size = this.getSize(),
+                container = this._container,
                 gl = this._glMap,
                 offset = this._map.getSize().multiplyBy(this.options.padding),
                 topLeft = this._map.containerPointToLayerPoint([0, 0]).subtract(offset);
@@ -182,7 +199,7 @@
         _animateZoom: function (e) {
             var scale = this._map.getZoomScale(e.zoom);
             var padding = this._map.getSize().multiplyBy(this.options.padding * scale);
-            var viewHalf = this._getSize()._divideBy(2);
+            var viewHalf = this.getSize()._divideBy(2);
             // corrections for padding (scaled), adapted from
             // https://github.com/Leaflet/Leaflet/blob/master/src/map/Map.js#L1490-L1508
             var topLeft = this._map.project(e.center, e.zoom)
