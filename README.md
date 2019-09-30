@@ -55,8 +55,8 @@ Add a script tag referencing mapbox-gl-leaflet after adding leaflet in your webs
 <script src="leaflet-mapbox-gl.js"></script>
 
 <!-- Mapbox GL -->
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.14.3/mapbox-gl.css' rel='stylesheet' />
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.14.3/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js'></script>
 ```
 You can also use Unpkg as a CDN using:
 ```html
