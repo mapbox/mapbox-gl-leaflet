@@ -39,7 +39,7 @@
                 this._initContainer();
             }
 
-            this.getPane().appendChild(this._container);
+            map.getPanes().tilePane.appendChild(this._container);
 
             this._initGL();
 
@@ -56,7 +56,7 @@
                 L.DomEvent.off(this._map._proxy, L.DomUtil.TRANSITION_END, this._transitionEnd, this);
             }
 
-            this.getPane().removeChild(this._container);
+            map.getPanes().tilePane.removeChild(this._container);
             this._glMap.remove();
             this._glMap = null;
         },
