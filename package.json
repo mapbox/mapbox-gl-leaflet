@@ -1,6 +1,6 @@
 {
   "name": "mapbox-gl-leaflet",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "binding from mapbox gl to the leaflet api",
   "main": "leaflet-mapbox-gl.js",
   "directories": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mapbox/mapbox-gl-leaflet.git"
+    "url": "https://github.com/mapbox/mapbox-gl-leaflet.git"
   },
   "keywords": [
     "mapbox",
