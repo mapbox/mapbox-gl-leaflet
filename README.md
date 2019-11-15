@@ -48,15 +48,17 @@ Create a mapbox account, then head to [https://www.mapbox.com/studio/](https://w
 Code for these examples is hosted in the [examples folder](https://github.com/mapbox/mapbox-gl-leaflet/tree/master/examples)
 
 ## Installation
-Add a script tag referencing mapbox-gl-leaflet after adding leaflet in your website:
+Add a script tag referencing mapbox-gl-leaflet after adding leaflet and mapbox-gl-js in your website:
 ```html
+<!-- Leaflet -->
 <link rel="stylesheet" href="leaflet.css" />
 <script src="leaflet.js"></script>
-<script src="leaflet-mapbox-gl.js"></script>
 
 <!-- Mapbox GL -->
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.css' rel='stylesheet' />
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+
+<script src="leaflet-mapbox-gl.js"></script>
 ```
 You can also use Unpkg as a CDN using:
 ```html
