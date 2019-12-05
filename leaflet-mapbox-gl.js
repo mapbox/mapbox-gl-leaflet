@@ -67,7 +67,8 @@
                 zoomanim: this._animateZoom, // applys the zoom animation to the <canvas>
                 zoom: this._pinchZoom, // animate every zoom event for smoother pinch-zooming
                 zoomstart: this._zoomStart, // flag starting a zoom to disable panning
-                zoomend: this._zoomEnd
+                zoomend: this._zoomEnd,
+                resize: this._resize
             };
         },
 
@@ -261,6 +262,10 @@
                     zoom: zoom - 1
                 });
             }, this);
+        },
+
+        _resize: function (e) {
+            this._transitionEnd(e);
         }
     });
 
