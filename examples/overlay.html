@@ -26,7 +26,8 @@
     var map = new L.Map('map');
 		var gl = L.mapboxGL({
       accessToken: 'no-token',
-      style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json'
+      // get your own MapTiler token at https://cloud.maptiler.com/ or use MapBox style
+      style: 'https://api.maptiler.com/maps/basic/style.json?key=gbetYLSD5vR8MdtZ88AQ'
     }).addTo(map);
 
 		var	bounds = new L.LatLngBounds(
