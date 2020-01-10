@@ -24,10 +24,11 @@ var gl = L.mapboxGL({
 Note that you can use any vector tile source useable by mapbox-gl. For instance, you can use [OSM2VectorTiles](http://osm2vectortiles.org/) with:
 ```javascript
 var gl = L.mapboxGL({
-	style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
+	style: 'https://api.maptiler.com/maps/topo/style.json?key=<YOUR_MAPTILER_API_KEY>',
 	accessToken: 'no-token'
 }).addTo(map);
 ```
+
 Once you have created the leaflet layer, the mapbox-gl map object can be accessed using
 ```javascript
 gl.getMapboxMap()....
