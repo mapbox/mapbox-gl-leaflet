@@ -26,8 +26,6 @@
 
             if (options.accessToken) {
                 mapboxgl.accessToken = options.accessToken;
-            } else {
-                throw new Error('You should provide a Mapbox GL access token as a token option.');
             }
 
             // setup throttling the update event when panning
