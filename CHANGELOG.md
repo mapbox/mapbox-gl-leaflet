@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- ensure gl map is added to leaflet TilePane
+- `accessToken` is now optional
 
 ## [0.0.11] - 2019-11-04
 

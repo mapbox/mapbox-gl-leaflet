@@ -24,8 +24,7 @@ var gl = L.mapboxGL({
 Note that you can use any vector tile source useable by mapbox-gl. For instance, you can use [OSM2VectorTiles](http://osm2vectortiles.org/) with:
 ```javascript
 var gl = L.mapboxGL({
-	style: 'https://api.maptiler.com/maps/topo/style.json?key=<YOUR_MAPTILER_API_KEY>',
-	accessToken: 'no-token'
+	style: 'https://api.maptiler.com/maps/topo/style.json?key=<YOUR_MAPTILER_API_KEY>'
 }).addTo(map);
 ```
 
