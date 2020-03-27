@@ -1,6 +1,6 @@
 {
   "name": "mapbox-gl-leaflet",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "binding from mapbox gl to the leaflet api",
   "main": "leaflet-mapbox-gl.js",
   "directories": {
