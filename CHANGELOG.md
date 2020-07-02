@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.0.13] - 2020-07-02
+
+### Added
+-  `.getPaneName()` method
+### Fixed
+- Allow gl tiles to be added to a pane defined in options
+
 ## [0.0.12] - 2020-03-27
 
 ### Fixed
