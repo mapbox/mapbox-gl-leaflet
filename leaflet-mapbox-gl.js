@@ -39,7 +39,7 @@
                 this._initContainer();
             }
 
-            var paneName = map.getPane(this.options.pane) ? this.options.pane : 'tilePane'; 
+            var paneName = this.getPaneName();
             map.getPane(paneName).appendChild(this._container);
             
             this._initGL();
