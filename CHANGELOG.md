@@ -6,7 +6,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [0.0.13] - 2020-07-02
 
 ### Added
 -  `.getPaneName()` method
