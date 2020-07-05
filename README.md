@@ -65,6 +65,18 @@ You can also use Unpkg as a CDN using:
 <script src="https://unpkg.com/mapbox-gl-leaflet/leaflet-mapbox-gl.js"></script>
 ```
 
+If you are using modules (Webpack or similar), simply `import` the library, in addition to Leaflet. 
+
+```js
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'mapbox-gl-leaflet'; // automatically attaches itself as L.mapboxGL
+const map = L.map('map');
+L.mapboxGL({
+    // style etc
+}).addTo(map);
+```
+
 ## Motivation
 This project makes it possible to easily add a mapbox-gl-js layer in your Leaflet map. When using mapbox-gl-leaflet, you won't be able to use some of the mapbox-gl-js features.
 Here are the main differences between a "pure" mapbox-gl-js map and a Leaflet map using mapbox-gl-leaflet:
