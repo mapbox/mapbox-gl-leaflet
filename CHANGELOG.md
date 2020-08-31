@@ -6,11 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.0.13] - 2020-08-31
 
 ### Added
 -  `.getPaneName()` method
+
 ### Fixed
-- Allow gl tiles to be added to a pane defined in options
+- Allow gl tiles to be added to a custom pane defined in options
 
 ## [0.0.12] - 2020-03-27
 
@@ -93,7 +95,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Compatibility release for Leaflet `v0.7.x`
 
-[Unreleased]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.12...HEAD
+[Unreleased]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.13...HEAD
+[0.0.13]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.12...v0.0.13
 [0.0.12]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.11...v0.0.12
 [0.0.11]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.10...v0.0.11
 [0.0.10]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.9...v0.0.10
