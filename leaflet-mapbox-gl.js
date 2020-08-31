@@ -18,7 +18,9 @@
             padding: 0.1,
             // whether or not to register the mouse and keyboard
             // events on the mapbox overlay
-            interactive: false
+            interactive: false,
+            // set the tilepane as the default pane to draw gl tiles
+            pane: 'tilePane'
         },
 
         initialize: function (options) {
@@ -37,8 +39,9 @@
                 this._initContainer();
             }
 
-            map.getPanes().tilePane.appendChild(this._container);
-
+            var paneName = this.getPaneName();
+            map.getPane(paneName).appendChild(this._container);
+            
             this._initGL();
 
             this._offset = this._map.containerPointToLayerPoint([0, 0]);
@@ -53,8 +56,9 @@
             if (this._map._proxy && this._map.options.zoomAnimation) {
                 L.DomEvent.off(this._map._proxy, L.DomUtil.TRANSITION_END, this._transitionEnd, this);
             }
-
-            map.getPanes().tilePane.removeChild(this._container);
+            var paneName = this.getPaneName();
+            map.getPane(paneName).removeChild(this._container);
+            
             this._glMap.remove();
             this._glMap = null;
         },
@@ -94,7 +98,12 @@
         getContainer: function () {
             return this._container;
         },
-
+        
+        // returns the pane name set in options if it is a valid pane, defaults to tilePane
+        getPaneName: function () {
+            return this._map.getPane(this.options.pane) ? this.options.pane : 'tilePane'; 
+        },
+        
         _initContainer: function () {
             var container = this._container = L.DomUtil.create('div', 'leaflet-gl-layer');
 
