@@ -238,7 +238,7 @@
 
             L.DomUtil.setTransform(
                 this._glMap._actualCanvas,
-                offset.subtract(this._offset),
+                null,
                 scale
             );
 
