@@ -229,15 +229,11 @@
         },
 
         _zoomEnd: function () {
-            var scale = this._map.getZoomScale(this._map.getZoom()),
-                offset = this._map._latLngToNewLayerPoint(
-                    this._map.getBounds().getNorthWest(),
-                    this._map.getZoom(),
-                    this._map.getCenter()
-                );
+            var scale = this._map.getZoomScale(this._map.getZoom());
 
             L.DomUtil.setTransform(
                 this._glMap._actualCanvas,
+                // https://github.com/mapbox/mapbox-gl-leaflet/pull/130
                 null,
                 scale
             );
