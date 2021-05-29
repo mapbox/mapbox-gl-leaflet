@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.0.15] - 2021-05-29
+
+- remember GL map when removed and readded to avoid creating a new SKU token - #138 :pray: @vcoppe :pray:
+
+### Fixed
+
+- fix gl offset issue in low zoom level
+
 ## [0.0.14] - 2020-11-24
 
 ### Fixed
@@ -101,8 +109,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Compatibility release for Leaflet `v0.7.x`
 
-[Unreleased]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.14...HEAD
-[0.0.14]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.13...v0.0.13
+[Unreleased]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.15...HEAD
+[0.0.15]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.14...v0.0.15
+[0.0.14]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.13...v0.0.14
 [0.0.13]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.12...v0.0.13
 [0.0.12]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.11...v0.0.12
 [0.0.11]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.10...v0.0.11
