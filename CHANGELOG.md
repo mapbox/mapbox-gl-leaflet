@@ -10,10 +10,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - remember GL map when removed and readded to avoid creating a new SKU token - #138 :pray: @vcoppe :pray:
 
-### Fixed
-
-- fix gl offset issue in low zoom level
-
 ## [0.0.14] - 2020-11-24
 
 ### Fixed
