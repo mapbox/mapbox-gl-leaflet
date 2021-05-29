@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.0.15] - 2021-05-29
 
+### Fixed
 - remember GL map when removed and readded to avoid creating a new SKU token - #138 :pray: @vcoppe :pray:
 
 ## [0.0.14] - 2020-11-24
