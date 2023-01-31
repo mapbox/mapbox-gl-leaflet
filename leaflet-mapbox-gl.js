@@ -173,9 +173,11 @@
 
             this._transformGL(gl);
 
-            if (gl.transform.width !== size.x || gl.transform.height !== size.y) {
-                container.style.width  = size.x + 'px';
-                container.style.height = size.y + 'px';
+            var x_round = Math.round(size.x), y_round = Math.round(size.y);
+
+            if (Math.round(gl.transform.width) !== x_round || Math.round(gl.transform.height) !== y_round) {
+                container.style.width  = x_round + 'px';
+                container.style.height = y_round + 'px';
                 if (gl._resize !== null && gl._resize !== undefined){
                     gl._resize();
                 } else {
