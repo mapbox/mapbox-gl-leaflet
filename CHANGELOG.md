@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.0.16] - 2023-06-05
+
+### Fixed
+- fix jitter during pan in containers defined using percent - #144 :pray: @trygveaa :pray:
+- avoid updating layers that have been removed from the map - #155 :pray: @denisones :pray:
+
 ## [0.0.15] - 2021-05-29
 
 ### Fixed
@@ -106,7 +112,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Compatibility release for Leaflet `v0.7.x`
 
-[Unreleased]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.15...HEAD
+[Unreleased]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.16...HEAD
+[0.0.16]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.15...v0.0.16
 [0.0.15]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.14...v0.0.15
 [0.0.14]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.13...v0.0.14
 [0.0.13]: https://github.com/mapbox/mapbox-gl-leaflet/compare/v0.0.12...v0.0.13
