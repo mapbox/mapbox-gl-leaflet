@@ -31,3 +31,9 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# Build output (keep dist/leaflet-mapbox-gl.d.ts as it's hand-written)
+dist/*.js
+dist/*.js.map
+dist/*.cjs
+dist/*.cjs.map
