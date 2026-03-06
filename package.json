@@ -1,13 +1,27 @@
 {
   "name": "mapbox-gl-leaflet",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "binding from mapbox gl to the leaflet api",
-  "main": "leaflet-mapbox-gl.js",
+  "main": "dist/leaflet-mapbox-gl.js",
+  "module": "dist/leaflet-mapbox-gl.esm.js",
+  "types": "dist/leaflet-mapbox-gl.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/leaflet-mapbox-gl.esm.js",
+      "require": "./dist/leaflet-mapbox-gl.js",
+      "types": "./dist/leaflet-mapbox-gl.d.ts"
+    }
+  },
+  "type": "module",
+  "sideEffects": true,
   "directories": {
     "example": "examples"
   },
   "scripts": {
-    "test": "jshint leaflet-mapbox-gl.js"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build",
+    "lint": "jshint src/leaflet-mapbox-gl.js",
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -20,15 +34,21 @@
     "leafletjs",
     "maps"
   ],
-  "files": [],
+  "files": [
+    "dist",
+    "src",
+    "leaflet-mapbox-gl.js"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mapbox/mapbox-gl-leaflet/issues"
   },
   "homepage": "https://github.com/mapbox/mapbox-gl-leaflet",
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "gh-release": "^6.0.0",
-    "jshint": "^2.10.1"
+    "jshint": "^2.10.1",
+    "rollup": "^4.9.0"
   },
   "peerDependencies": {
     "leaflet": "^1.0.0",

@@ -1,0 +1,12 @@
+{
+  "esversion": 11,
+  "module": true,
+  "browser": true,
+  "node": true,
+  "undef": true,
+  "unused": true,
+  "globals": {
+    "L": true,
+    "mapboxgl": true
+  }
+}
