@@ -20,11 +20,24 @@ export default [
         external: ['leaflet', 'mapbox-gl'],
         plugins: [resolve()]
     },
-    // UMD build (for browsers and CommonJS)
+    // CJS build (for Node.js/CommonJS)
     {
         input: 'src/leaflet-mapbox-gl.js',
         output: {
-            file: 'dist/leaflet-mapbox-gl.js',
+            file: 'dist/leaflet-mapbox-gl.cjs',
+            format: 'cjs',
+            banner,
+            sourcemap: true,
+            exports: 'named'
+        },
+        external: ['leaflet', 'mapbox-gl'],
+        plugins: [resolve()]
+    },
+    // UMD build (for browsers)
+    {
+        input: 'src/leaflet-mapbox-gl.js',
+        output: {
+            file: 'dist/leaflet-mapbox-gl.umd.js',
             format: 'umd',
             name: 'L.mapboxGL',
             banner,
